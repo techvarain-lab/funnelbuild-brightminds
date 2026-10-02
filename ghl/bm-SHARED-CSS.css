@@ -1,0 +1,635 @@
+/* ============================================================
+   BRIGHT MINDS LEARNING CENTER
+   GoHighLevel paste stylesheet
+   ------------------------------------------------------------
+   WHERE THIS GOES
+     Page editor -> CSS icon (top toolbar) -> select all -> paste.
+     Paste into every page that uses the Bright Minds code, or into
+     Funnel Settings -> Custom CSS if your plan exposes one.
+
+   WHY A SEPARATE STYLESHEET
+     GHL custom code blocks inject HTML into an already-rendered
+     page body, so this file cannot be linked.
+
+   EVERY RULE IS SCOPED TO .bm-page
+     GHL owns the header, footer, section and row surrounding our
+     markup. An unscoped `*` reset or `body` rule would destroy that
+     layout. The .bm-page wrapper div sits at the top of each HTML file.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..600&family=Public+Sans:wght@300;400;500;600;700&display=swap');
+
+/* ---------- GHL overrides ---------- */
+
+/* GHL defaults the page background to white. This design is parchment. */
+html, body {
+  background: #fdf9f4 !important;
+}
+
+/* GHL silently caps its container at 1170px and pads it. Our layout
+   manages its own width through .wrap. */
+.inner {
+  max-width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* ---------- Scoped stylesheet ---------- */
+/* ============================================================
+   BRIGHT MINDS LEARNING CENTER
+   System reference: Refero Styles / Slite
+   "Warm parchment notebook with terracotta pen"
+
+   Every surface is cream paper. Every accent is a single ember
+   stroke, held under 5% of any section so it keeps its meaning.
+
+   Contrast notes, measured not assumed:
+   - Ember #f67748 with WHITE text is 2.75:1 and FAILS WCAG AA.
+     All ember fills therefore carry Shade Ink #2d2f34 at 4.87:1.
+   - Ember as body text on parchment is 2.62:1, so ember is used
+     for fills, borders and the scribble only, never for prose.
+   ============================================================ */
+
+/* ---------- 1. Tokens ---------- */
+
+.bm-page {
+  /* Surfaces */
+  --canvas: #fdf9f4;   /* parchment cream: page + primary card */
+  --white: #ffffff;    /* star white: elevated product cards */
+  --dust: #f9efe4;     /* dust sand: tag chips + secondary cards */
+
+  /* Borders */
+  --silver: #ecedef;   /* moon silver: hairlines */
+  --mist: #d9dde6;     /* border mist: soft card edges */
+
+  /* Ink */
+  --ink: #2d2f34;      /* shade ink: headings */
+  --charcoal: #3f434a; /* shade charcoal: body */
+  --slate: #5e646e;    /* shade slate: tertiary */
+  /* Shade dusk is darkened from #6a707c: the original fails WCAG AA at
+     4.38:1 on the dust cards. #636973 measures 4.87:1 there. */
+  --dusk: #636973;     /* shade dusk: small print, labels, unavailable cells */
+  --fog: #9da3af;      /* shade fog: decorative fills, legend keys only */
+
+
+  /* The single accent */
+  --ember: #f67748;
+  --blue: #74a6f1;     /* neptune blue: secondary, one button per page */
+
+  /* Type */
+  --serif: 'Lora', Georgia, 'Times New Roman', serif;
+  --sans: 'Public Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Radius */
+  --r-ghost: 8px;
+  --r-product: 18px;
+  --r-card: 32px;
+  --r-pill: 999px;
+  --r-tag: 9999px;
+
+  /* Layout */
+  --page: 1200px;
+  --gap-section: 96px;
+  --pad-card: 24px;
+
+  /* The only elevation in the system: three layers, white product cards */
+  --lift: 0 1px 3px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.01);
+
+  /* Motion: 130ms, restrained */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --fast: 130ms;
+}
+
+@media (max-width: 900px) {
+  .bm-page { --gap-section: 72px; }
+}
+
+@media (max-width: 640px) {
+  .bm-page { --gap-section: 56px; }
+}
+
+/* ---------- 2. Reset ---------- */
+
+:where(.bm-page, .bm-page *, .bm-page *::before, .bm-page *::after) { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+  -webkit-text-size-adjust: 100%;
+}
+
+.bm-page {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  background: var(--canvas);
+  color: var(--charcoal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bm-page img { max-width: 100%; height: auto; display: block; }
+
+.bm-page a { color: var(--charcoal); text-decoration: none; }
+a:hover { text-decoration: underline; text-decoration-color: var(--ember); }
+
+.bm-page :focus-visible {
+  outline: 2px solid var(--ember);
+  outline-offset: 3px;
+  border-radius: var(--r-ghost);
+}
+
+.bm-page .skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 1000;
+  background: var(--ember); color: var(--ink);
+  padding: 12px 24px; font-weight: 600;
+}
+.bm-page .skip-link:focus { left: 0; }
+
+/* ---------- 3. Typography ---------- */
+
+/* 40px and above is always the serif. That is the rule. */
+.bm-page .display {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(38px, 6.6vw, 64px);
+  line-height: 1.2;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.bm-page .h-lg {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(30px, 4.2vw, 36px);
+  line-height: 1.2;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.bm-page .h {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.bm-page .h-sm {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.bm-page .body-lg { font-size: 19px; line-height: 1.4; color: var(--charcoal); }
+.bm-page .body { font-size: 16px; line-height: 1.5; color: var(--charcoal); }
+.bm-page .body-sm { font-size: 15px; line-height: 1.5; color: var(--slate); }
+.bm-page .caption { font-size: 13px; line-height: 1.2; color: var(--dusk); }
+
+.bm-page .label {
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dusk);
+}
+
+/* Small helper copy under a block */
+.bm-page .hint { font-size: 13px; line-height: 1.45; color: var(--dusk); }
+
+.bm-page .measure { max-width: 62ch; }
+.bm-page .dim { color: var(--slate); }
+
+/* ---------- 4. The scribble annotation ----------
+   The system's signature. Two offset ellipses with asymmetric
+   border-radius and opposing rotation, so it reads as a pen
+   going round twice. Scales with the word, no SVG path needed. */
+
+.bm-page .circled {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  padding-inline: 2px;
+}
+
+.circled::before,
+.bm-page .circled::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.bm-page .circled::after {
+  inset: -16% -6%;
+  border: 2px solid var(--ember);
+  border-radius: 49% 51% 48% 52% / 56% 45% 55% 44%;
+  transform: rotate(-2.2deg);
+}
+
+.bm-page .circled::before {
+  inset: -21% -9%;
+  border: 1.5px solid var(--ember);
+  opacity: 0.38;
+  border-radius: 52% 48% 51% 49% / 45% 57% 43% 55%;
+  transform: rotate(1.9deg);
+}
+
+/* ---------- 5. Layout ---------- */
+
+.bm-page .wrap {
+  width: 100%;
+  max-width: var(--page);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.bm-page .band { padding-block: var(--gap-section); }
+.bm-page .band-tight { padding-block: calc(var(--gap-section) / 2); }
+
+.bm-page .stack > * + * { margin-top: 16px; }
+.bm-page .stack-lg > * + * { margin-top: 24px; }
+
+.bm-page .two-col {
+  display: grid;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (min-width: 900px) { .bm-page .two-col { grid-template-columns: 1fr 1fr; gap: 72px; } }
+
+.bm-page .centre { text-align: center; }
+
+/* ---------- 6. Navigation ---------- */
+
+.bm-page .nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--silver);
+}
+
+.bm-page .nav-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 68px;
+}
+
+.bm-page .wordmark {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.1;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.bm-page .wordmark:hover { text-decoration: none; }
+
+.bm-page .wordmark-sub {
+  display: block;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dusk);
+}
+
+.bm-page .nav-links { display: none; gap: 28px; }
+@media (min-width: 980px) { .bm-page .nav-links { display: flex; } }
+
+.bm-page .nav-links a {
+  font-size: 15px;
+  color: var(--charcoal);
+  transition: color var(--fast) var(--ease);
+}
+.bm-page .nav-links a:hover { color: var(--ember); }
+
+.bm-page .nav-right { display: flex; align-items: center; gap: 12px; }
+
+/* ---------- 7. Buttons ---------- */
+
+.bm-page .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  min-height: 44px;
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1;
+  border-radius: var(--r-pill);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--fast) var(--ease),
+              color var(--fast) var(--ease),
+              border-color var(--fast) var(--ease);
+}
+
+.bm-page .btn:hover { text-decoration: none; }
+
+/* Ember pill. Shade Ink text, not white: 4.87:1 passes AA. */
+.bm-page .btn-ember { background: var(--ember); color: var(--ink); }
+.bm-page .btn-ember:hover { background: #e86a3a; }
+
+/* Dark pill for the highest-intent action in the nav */
+.bm-page .btn-dark { background: var(--ink); color: var(--white); }
+.bm-page .btn-dark:hover { background: #43464c; }
+
+.bm-page .btn-outline {
+  background: transparent;
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.bm-page .btn-outline:hover { background: var(--ink); color: var(--white); }
+
+.bm-page .btn-sm { padding: 8px 18px; min-height: 38px; font-size: 15px; }
+.bm-page .btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: center; }
+
+/* The full CTA label needs about 330px, which a 375px phone cannot give
+   it. These buttons wrap to two centred lines instead of overflowing. */
+.bm-page .btn-wrap {
+  white-space: normal;
+  text-align: center;
+  line-height: 1.3;
+  max-width: 100%;
+}
+
+/* ---------- 8. Tag chips ---------- */
+
+.bm-page .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+
+.bm-page .chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--charcoal);
+  background: var(--dust);
+  border-radius: var(--r-tag);
+}
+
+.bm-page .chip-left { justify-content: flex-start; }
+
+
+/* ---------- 9. Cards ---------- */
+
+/* Cream feature card: the system's primary marketing unit */
+.bm-page .feature-card {
+  background: var(--dust);
+  border-radius: var(--r-card);
+  padding: 48px 24px 32px;
+}
+
+/* Highlighted variant: a 2px ember stroke, used at most once or twice */
+.bm-page .feature-card.is-key {
+  border-left: 2px solid var(--ember);
+  background: var(--canvas);
+}
+
+/* White product card: the only place elevation exists */
+.bm-page .product-card {
+  background: var(--white);
+  border-radius: var(--r-product);
+  box-shadow: var(--lift);
+  overflow: hidden;
+}
+
+.bm-page .product-card-pad { padding: 24px; }
+
+/* Small card, 12px, for nested items */
+.bm-page .small-card {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--lift);
+  padding: 20px;
+}
+
+/* ---------- 10. Photo frames ---------- */
+
+/* Product card frame: white, 12px, three-layer lift */
+.bm-page .photo-frame {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--lift);
+  overflow: hidden;
+}
+
+.bm-page .photo {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.bm-page .photo-wide { aspect-ratio: 16 / 9; object-fit: cover; }
+
+/* Square crop, biased right, to clear the signage out of frame */
+.bm-page .photo-square { aspect-ratio: 1 / 1; object-fit: cover; object-position: 82% 50%; }
+
+/* The one ember testimonial card on the page */
+.bm-page .ember-card {
+  background: var(--ember);
+  color: var(--ink);
+  border-radius: 16px;
+  padding: 32px;
+}
+
+.bm-page .ember-card p { color: var(--ink); }
+
+/* ---------- 11. Grids ---------- */
+
+.bm-page .grid-2 { display: grid; gap: 24px; }
+.bm-page .grid-3 { display: grid; gap: 24px; }
+.bm-page .grid-4 { display: grid; gap: 24px; }
+
+@media (min-width: 700px) {
+  .bm-page .grid-2 { grid-template-columns: 1fr 1fr; }
+  .bm-page .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .bm-page .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1000px) {
+  .bm-page .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .bm-page .grid-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ---------- 12. Report ---------- */
+
+.bm-page .report { display: grid; }
+
+.bm-page .report-row {
+  display: grid;
+  gap: 2px 24px;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--silver);
+  align-items: baseline;
+}
+
+.bm-page .report-row:last-of-type { border-bottom: none; }
+
+@media (min-width: 560px) { .bm-page .report-row { grid-template-columns: 1fr auto; } }
+
+.bm-page .report-key { font-size: 16px; font-weight: 600; color: var(--ink); }
+.bm-page .report-val { font-size: 15px; color: var(--slate); }
+.bm-page .report-val.gap { color: var(--ink); font-weight: 600; }
+
+/* ---------- 13. Live calendar embed ----------
+   The GoHighLevel widget loads iframeResizer, which sets the iframe
+   height by postMessage. Never give it a fixed height, that fights the
+   resizer. min-height is only a floor in case form_embed.js fails. */
+
+.bm-page .gcal {
+  display: block;
+  min-height: 640px;
+}
+
+@media (max-width: 640px) {
+  .bm-page .gcal { min-height: 760px; }
+}
+
+/* ---------- 14. Questions ---------- */
+
+.bm-page .qs { border-top: 1px solid var(--silver); }
+.bm-page .q { border-bottom: 1px solid var(--silver); }
+
+.bm-page .q summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding-block: 20px;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--ink);
+  transition: color var(--fast) var(--ease);
+}
+
+.bm-page .q summary::-webkit-details-marker { display: none; }
+.bm-page .q summary:hover { color: var(--ember); }
+
+.bm-page .q summary::after {
+  content: '+';
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--dusk);
+  flex-shrink: 0;
+}
+
+.bm-page .q[open] summary::after { content: '\2212'; }
+
+.bm-page .q-a { padding-bottom: 24px; max-width: 68ch; font-size: 16px; line-height: 1.5; color: var(--slate); }
+
+/* ---------- 15. Booking and confirmation ---------- */
+
+.bm-page .page-head {
+  padding-top: 72px;
+  padding-bottom: 56px;
+}
+
+.bm-page .split { display: grid; gap: 48px; align-items: start; }
+
+@media (min-width: 1000px) {
+  .bm-page .split { grid-template-columns: 0.85fr 1fr; gap: 64px; }
+  .bm-page .split-aside { position: sticky; top: 92px; }
+}
+
+.bm-page .step-row {
+  display: grid;
+  gap: 2px 20px;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--silver);
+}
+
+.bm-page .step-row:last-child { border-bottom: none; }
+.bm-page .step-key { font-size: 15px; font-weight: 600; color: var(--ink); }
+.bm-page .step-val { font-size: 15px; line-height: 1.45; color: var(--slate); }
+
+.bm-page .steps { list-style: none; display: grid; gap: 14px; counter-reset: n; }
+
+.bm-page .steps li {
+  counter-increment: n;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 12px;
+  align-items: start;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--slate);
+}
+
+.bm-page .steps li::before {
+  content: counter(n);
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--ember);
+  line-height: 1.45;
+}
+
+
+/* ---------- 18. Closing ---------- */
+
+.bm-page .closer .display { max-width: 18ch; margin-inline: auto; }
+.bm-page .closer .body-lg { max-width: 52ch; margin: 24px auto 32px; }
+
+/* ---------- 19. Footer ---------- */
+
+.bm-page .foot {
+  border-top: 1px solid var(--silver);
+  padding-block: 56px;
+}
+
+.bm-page .foot-grid { display: grid; gap: 32px; }
+
+@media (min-width: 800px) { .bm-page .foot-grid { grid-template-columns: 1.8fr 1fr 1fr; gap: 48px; } }
+
+.bm-page .foot h4 {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dusk);
+  margin-bottom: 12px;
+}
+
+.bm-page .foot ul { list-style: none; display: grid; gap: 8px; }
+.bm-page .foot li, .bm-page .foot a { font-size: 15px; color: var(--charcoal); }
+.bm-page .foot a:hover { color: var(--ember); }
+
+.bm-page .foot-base {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--silver);
+  font-size: 13px;
+  color: var(--fog);
+}
+
+/* ---------- 20. Motion ---------- */
+
+.bm-page .rise { opacity: 0; transform: translateY(12px); }
+.bm-page .rise.in { opacity: 1; transform: translateY(0); transition: opacity 500ms var(--ease), transform 500ms var(--ease); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  :where(.bm-page, .bm-page *, .bm-page *::before, .bm-page *::after) {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .bm-page .rise { opacity: 1; transform: none; }
+}

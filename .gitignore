@@ -12,3 +12,6 @@ desktop.ini
 # assets/images/ holds the original source photography, which cannot be
 # regenerated, and assets/images/optimized/ holds the files the pages
 # actually load. Both are tracked.
+
+# GHL export build scripts are tracked, but their temp output is not
+ghl/_*.txt

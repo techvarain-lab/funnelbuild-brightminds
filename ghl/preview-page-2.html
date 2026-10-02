@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PREVIEW - not for publishing - Bright Minds</title>
+<link rel="stylesheet" href="bm-SHARED-CSS.css">
+<style>
+  /* Simulated GHL chrome, so you can see what the scoped CSS is
+     fighting before you paste anything into the builder. */
+  .ghl-bar { background:#1a1d21; color:#9ea0a9; padding:10px 16px;
+             font:12px/1.4 -apple-system,"Segoe UI",sans-serif;
+             border-bottom:1px solid #272c33; text-align:center; }
+  .ghl-row { padding:40px 24px; background:#2a2f36; }
+  .ghl-inner { max-width:1170px; margin:0 auto; background:#3a4048;
+               padding:24px; min-height:200px; }
+</style>
+</head>
+<body>
+<div class="ghl-bar">SIMULATED GHL ROW. The grey frame is what your page sits
+  inside. Set this row padding to 0 in GHL (guide step 2) and it disappears.</div>
+<div class="ghl-row">
+  <div class="ghl-inner">
+<!-- ============================================================
+   BRIGHT MINDS -> PASTE INTO A GHL CUSTOM CODE ELEMENT
+   ------------------------------------------------------------
+   REPLACE THESE TOKENS BEFORE PASTING:
+     #
+
+   The stylesheet goes in the page's CSS panel, not in here.
+   Everything is wrapped in .bm-page so it cannot disturb GHL's own
+   header, footer, section or row layout.
+   ============================================================ -->
+<div class="bm-page">
+<a class="skip-link" href="##main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="wordmark" href="#">
+      Bright Minds
+      <span class="wordmark-sub">Learning Center / Dasmarinas</span>
+    </a>
+    <div class="nav-right">
+      <a class="btn btn-outline btn-sm" href="#">Back</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-head">
+  <div class="wrap centre stack">
+    <p class="label">Saturdays only / no obligation / no card</p>
+    <h1 class="h-lg" style="max-width: 18ch; margin-inline: auto;">Reserve your child’s free Saturday slot</h1>
+    <p class="body-lg dim measure" style="margin-inline: auto;">
+      Pick a time below. You will get a confirmation by text or email straight away, and we will
+      send the tutor’s name, the address and what to bring.
+    </p>
+  </div>
+</section>
+
+<section class="band-tight" style="padding-bottom: 96px;">
+  <div class="wrap split">
+
+    <!-- ============ REASSURANCE ============ -->
+    <div class="split-aside stack-lg">
+
+      <div class="feature-card">
+        <p class="label" style="margin-bottom: 20px;">What you get</p>
+        <div class="step-row">
+          <span class="step-key">One hour</span>
+          <span class="step-val">One to one with a subject tutor at your child’s grade level.</span>
+        </div>
+        <div class="step-row">
+          <span class="step-key">A trial class</span>
+          <span class="step-val">A real session straight afterwards, on the same Saturday.</span>
+        </div>
+        <div class="step-row">
+          <span class="step-key">A written report</span>
+          <span class="step-val">Two pages on what is strong, what is not, and what to do next.</span>
+        </div>
+        <div class="step-row">
+          <span class="step-key">Nothing owed</span>
+          <span class="step-val">No enrolment, no package, no follow-up.</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <p class="label" style="margin-bottom: 20px;">After you book</p>
+        <ol class="steps">
+          <li><span>A confirmation by text or email, as soon as you book.</span></li>
+          <li><span>We match your child to the right tutor for their grade and subject.</span></li>
+          <li><span>You arrive with the notebook and any quiz papers.</span></li>
+          <li><span>The written report reaches you within two or three days.</span></li>
+        </ol>
+      </div>
+
+      <div class="feature-card">
+        <p class="label" style="margin-bottom: 20px;">Good to know</p>
+        <div class="step-row">
+          <span class="step-key">Saturdays</span>
+          <span class="step-val">8am to 5pm only. Six one hour slots, first come first served.</span>
+        </div>
+        <div class="step-row">
+          <span class="step-key">Time between</span>
+          <span class="step-val">Half an hour after each child, so the tutor can reset and write up before the next one.</span>
+        </div>
+        <div class="step-row">
+          <span class="step-key">To bring</span>
+          <span class="step-val">The notebook your child uses, plus recent quiz papers.</span>
+        </div>
+        <div class="step-row">
+          <span class="step-key">Online</span>
+          <span class="step-val">Same Saturday hours. Add it to your booking notes and we will send a test call first.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============ LIVE CALENDAR ============ -->
+    <div class="stack-lg">
+      <div class="product-card product-card-pad">
+        <div style="text-align:center; margin-bottom: 20px;">
+          <h2 class="h" style="margin-bottom: 8px;">Pick your Saturday</h2>
+          <p class="hint">Six slots each week. Book a few weeks ahead if you can.</p>
+        </div>
+
+        <!--
+          GoHighLevel inline booking widget.
+
+          Height note: the widget loads iframeResizer, which sets the
+          iframe height by postMessage. Do not add a fixed height here,
+          it will fight the resizer. The .gcal class sets min-height only,
+          as a floor in case form_embed.js fails to load.
+        -->
+        <iframe
+          class="gcal"
+          src="https://api.leadconnectorhq.com/widget/booking/PtUhcLCSm96dyQaVPAoo"
+          title="Book your child’s free Saturday tutoring slot"
+          allow="payment"
+          scrolling="no"
+          id="PtUhcLCSm96dyQaVPAoo_1790905117689"
+          style="width:100%;border:none;overflow:hidden;"></iframe>
+        <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
+
+        <p class="hint" style="text-align:center; margin-top: 16px;">
+          If the calendar is not loading, call us on
+          <a href="tel:0000000000">[ Phone number ]</a> and we will book you in directly.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-base" style="margin-top: 0; padding-top: 0;">
+      &copy; <span id="year">2026</span> Bright Minds Learning Center / Dasmarinas, Cavite /
+      <a href="#">Back to the main page</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</div>
+
+  </div>
+</div>
+</body>
+</html>
