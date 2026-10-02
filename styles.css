@@ -1,0 +1,774 @@
+/* ============================================================
+   BRIGHT MINDS LEARNING CENTER
+   System reference: Refero Styles / Slite
+   "Warm parchment notebook with terracotta pen"
+
+   Every surface is cream paper. Every accent is a single ember
+   stroke, held under 5% of any section so it keeps its meaning.
+
+   Contrast notes, measured not assumed:
+   - Ember #f67748 with WHITE text is 2.75:1 and FAILS WCAG AA.
+     All ember fills therefore carry Shade Ink #2d2f34 at 4.87:1.
+   - Ember as body text on parchment is 2.62:1, so ember is used
+     for fills, borders and the scribble only, never for prose.
+   ============================================================ */
+
+/* ---------- 1. Tokens ---------- */
+
+:root {
+  /* Surfaces */
+  --canvas: #fdf9f4;   /* parchment cream: page + primary card */
+  --white: #ffffff;    /* star white: elevated product cards */
+  --dust: #f9efe4;     /* dust sand: tag chips + secondary cards */
+
+  /* Borders */
+  --silver: #ecedef;   /* moon silver: hairlines */
+  --mist: #d9dde6;     /* border mist: soft card edges */
+
+  /* Ink */
+  --ink: #2d2f34;      /* shade ink: headings */
+  --charcoal: #3f434a; /* shade charcoal: body */
+  --slate: #5e646e;    /* shade slate: tertiary */
+  /* Shade dusk is darkened from #6a707c: the original fails WCAG AA at
+     4.38:1 on the dust cards. #636973 measures 4.87:1 there. */
+  --dusk: #636973;     /* shade dusk: small print, labels, unavailable cells */
+  --fog: #9da3af;      /* shade fog: decorative fills, legend keys only */
+
+  /* Input borders need 3:1 to be perceivable as a control boundary.
+     #d9dde6 measured 1.3:1, effectively invisible. */
+  --input-line: #868d99;
+
+  /* The single accent */
+  --ember: #f67748;
+  --blue: #74a6f1;     /* neptune blue: secondary, one button per page */
+
+  /* Type */
+  --serif: 'Lora', Georgia, 'Times New Roman', serif;
+  --sans: 'Public Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Radius */
+  --r-ghost: 8px;
+  --r-product: 18px;
+  --r-card: 32px;
+  --r-pill: 999px;
+  --r-tag: 9999px;
+
+  /* Layout */
+  --page: 1200px;
+  --gap-section: 96px;
+  --pad-card: 24px;
+
+  /* The only elevation in the system: three layers, white product cards */
+  --lift: 0 1px 3px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.01);
+
+  /* Motion: 130ms, restrained */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --fast: 130ms;
+}
+
+@media (max-width: 900px) {
+  :root { --gap-section: 72px; }
+}
+
+@media (max-width: 640px) {
+  :root { --gap-section: 56px; }
+}
+
+/* ---------- 2. Reset ---------- */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  background: var(--canvas);
+  color: var(--charcoal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--charcoal); text-decoration: none; }
+a:hover { text-decoration: underline; text-decoration-color: var(--ember); }
+
+:focus-visible {
+  outline: 2px solid var(--ember);
+  outline-offset: 3px;
+  border-radius: var(--r-ghost);
+}
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 1000;
+  background: var(--ember); color: var(--ink);
+  padding: 12px 24px; font-weight: 600;
+}
+.skip-link:focus { left: 0; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ---------- 3. Typography ---------- */
+
+/* 40px and above is always the serif. That is the rule. */
+.display {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(38px, 6.6vw, 64px);
+  line-height: 1.2;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.h-lg {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(30px, 4.2vw, 36px);
+  line-height: 1.2;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.h {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.h-sm {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.body-lg { font-size: 19px; line-height: 1.4; color: var(--charcoal); }
+.body { font-size: 16px; line-height: 1.5; color: var(--charcoal); }
+.body-sm { font-size: 15px; line-height: 1.5; color: var(--slate); }
+.caption { font-size: 13px; line-height: 1.2; color: var(--dusk); }
+
+.label {
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dusk);
+}
+
+.measure { max-width: 62ch; }
+.measure-sm { max-width: 52ch; }
+.dim { color: var(--slate); }
+
+/* ---------- 4. The scribble annotation ----------
+   The system's signature. Two offset ellipses with asymmetric
+   border-radius and opposing rotation, so it reads as a pen
+   going round twice. Scales with the word, no SVG path needed. */
+
+.circled {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  padding-inline: 2px;
+}
+
+.circled::before,
+.circled::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.circled::after {
+  inset: -16% -6%;
+  border: 2px solid var(--ember);
+  border-radius: 49% 51% 48% 52% / 56% 45% 55% 44%;
+  transform: rotate(-2.2deg);
+}
+
+.circled::before {
+  inset: -21% -9%;
+  border: 1.5px solid var(--ember);
+  opacity: 0.38;
+  border-radius: 52% 48% 51% 49% / 45% 57% 43% 55%;
+  transform: rotate(1.9deg);
+}
+
+/* ---------- 5. Layout ---------- */
+
+.wrap {
+  width: 100%;
+  max-width: var(--page);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.band { padding-block: var(--gap-section); }
+.band-tight { padding-block: calc(var(--gap-section) / 2); }
+
+.stack > * + * { margin-top: 16px; }
+.stack-lg > * + * { margin-top: 24px; }
+
+.two-col {
+  display: grid;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (min-width: 900px) { .two-col { grid-template-columns: 1fr 1fr; gap: 72px; } }
+
+.centre { text-align: center; }
+
+/* ---------- 6. Navigation ---------- */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--silver);
+}
+
+.nav-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 68px;
+}
+
+.wordmark {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.1;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.wordmark:hover { text-decoration: none; }
+
+.wordmark-sub {
+  display: block;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dusk);
+}
+
+.nav-links { display: none; gap: 28px; }
+@media (min-width: 980px) { .nav-links { display: flex; } }
+
+.nav-links a {
+  font-size: 15px;
+  color: var(--charcoal);
+  transition: color var(--fast) var(--ease);
+}
+.nav-links a:hover { color: var(--ember); }
+
+.nav-right { display: flex; align-items: center; gap: 12px; }
+
+/* ---------- 7. Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  min-height: 44px;
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1;
+  border-radius: var(--r-pill);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--fast) var(--ease),
+              color var(--fast) var(--ease),
+              border-color var(--fast) var(--ease);
+}
+
+.btn:hover { text-decoration: none; }
+
+/* Ember pill. Shade Ink text, not white: 4.87:1 passes AA. */
+.btn-ember { background: var(--ember); color: var(--ink); }
+.btn-ember:hover { background: #e86a3a; }
+
+/* Dark pill for the highest-intent action in the nav */
+.btn-dark { background: var(--ink); color: var(--white); }
+.btn-dark:hover { background: #43464c; }
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.btn-outline:hover { background: var(--ink); color: var(--white); }
+
+.btn-sm { padding: 8px 18px; min-height: 38px; font-size: 15px; }
+.btn-full { width: 100%; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: center; }
+
+/* The full CTA label needs about 330px, which a 375px phone cannot give
+   it. These buttons wrap to two centred lines instead of overflowing. */
+.btn-wrap {
+  white-space: normal;
+  text-align: center;
+  line-height: 1.3;
+  max-width: 100%;
+}
+
+/* ---------- 8. Tag chips ---------- */
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--charcoal);
+  background: var(--dust);
+  border-radius: var(--r-tag);
+}
+
+.chip-left { justify-content: flex-start; }
+
+/* Selectable chip, used for subject choice on the booking form */
+.chip-pick {
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: border-color var(--fast) var(--ease), background var(--fast) var(--ease);
+}
+
+.chip-pick:hover { border-color: var(--mist); }
+
+.chip-pick:has(input:checked) {
+  background: var(--ember);
+  color: var(--ink);
+}
+
+.chip-pick:has(.invalid) { border-color: var(--ember); background: #fdeae2; }
+
+.chip-pick input {
+  position: absolute;
+  opacity: 0;
+  width: 1px; height: 1px;
+}
+
+/* ---------- 9. Cards ---------- */
+
+/* Cream feature card: the system's primary marketing unit */
+.feature-card {
+  background: var(--dust);
+  border-radius: var(--r-card);
+  padding: 48px 24px 32px;
+}
+
+/* Highlighted variant: a 2px ember stroke, used at most once or twice */
+.feature-card.is-key {
+  border-left: 2px solid var(--ember);
+  background: var(--canvas);
+}
+
+/* White product card: the only place elevation exists */
+.product-card {
+  background: var(--white);
+  border-radius: var(--r-product);
+  box-shadow: var(--lift);
+  overflow: hidden;
+}
+
+.product-card-pad { padding: 24px; }
+
+/* Small card, 12px, for nested items */
+.small-card {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--lift);
+  padding: 20px;
+}
+
+/* ---------- 10. Photo frames ---------- */
+
+/* Product card frame: white, 12px, three-layer lift */
+.photo-frame {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--lift);
+  overflow: hidden;
+}
+
+.photo {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.photo-wide { aspect-ratio: 16 / 9; object-fit: cover; }
+
+/* Square crop, biased right, to clear the signage out of frame */
+.photo-square { aspect-ratio: 1 / 1; object-fit: cover; object-position: 82% 50%; }
+
+/* The one ember testimonial card on the page */
+.ember-card {
+  background: var(--ember);
+  color: var(--ink);
+  border-radius: 16px;
+  padding: 32px;
+}
+
+.ember-card p { color: var(--ink); }
+
+/* ---------- 11. Grids ---------- */
+
+.grid-2 { display: grid; gap: 24px; }
+.grid-3 { display: grid; gap: 24px; }
+.grid-4 { display: grid; gap: 24px; }
+
+@media (min-width: 700px) {
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1000px) {
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ---------- 12. Report ---------- */
+
+.report { display: grid; }
+
+.report-row {
+  display: grid;
+  gap: 2px 24px;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--silver);
+  align-items: baseline;
+}
+
+.report-row:last-of-type { border-bottom: none; }
+
+@media (min-width: 560px) { .report-row { grid-template-columns: 1fr auto; } }
+
+.report-key { font-size: 16px; font-weight: 600; color: var(--ink); }
+.report-val { font-size: 15px; color: var(--slate); }
+.report-val.gap { color: var(--ink); font-weight: 600; }
+
+/* ---------- 13. Saturday slots ----------
+   Replaces the old six-day table. Bookings are Saturday only, so the
+   grid reads as a time picker and drops the horizontal scroll the
+   table forced on phones. Status stays in ink and dusk; ember is
+   reserved for the CTA. */
+
+.slots {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+@media (min-width: 560px)  { .slots { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1000px) { .slots { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+
+/* The tile is dust-filled rather than canvas-filled. Against the white
+   product card a canvas fill measured 1.05:1 and a silver border 1.17:1,
+   so nine slots read as one blank area. Dust on white gives the shape a
+   visible edge. This is a tonal step, not a 3:1 boundary: the Slite
+   palette is cream on cream throughout, and the time and status are
+   carried by text at 11.8:1 and 4.87:1, not by the border. */
+.slot {
+  background: var(--dust);
+  border: 1px solid var(--mist);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.slot-time {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.slot-state {
+  font-size: 13px;
+  line-height: 1.2;
+  margin-top: 4px;
+}
+
+.slot-state.open { color: var(--ink); font-weight: 600; }
+.slot-state.wait { color: var(--charcoal); font-weight: 500; }
+.slot-state.full { color: var(--dusk); }
+
+/* Legend keys */
+.key-dot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 2px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* ---------- 14. Questions ---------- */
+
+.qs { border-top: 1px solid var(--silver); }
+.q { border-bottom: 1px solid var(--silver); }
+
+.q summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding-block: 20px;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--ink);
+  transition: color var(--fast) var(--ease);
+}
+
+.q summary::-webkit-details-marker { display: none; }
+.q summary:hover { color: var(--ember); }
+
+.q summary::after {
+  content: '+';
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--dusk);
+  flex-shrink: 0;
+}
+
+.q[open] summary::after { content: '\2212'; }
+
+.q-a { padding-bottom: 24px; max-width: 68ch; font-size: 16px; line-height: 1.5; color: var(--slate); }
+
+/* ---------- 15. Forms ---------- */
+
+.field { display: flex; flex-direction: column; gap: 8px; }
+
+.field > label,
+.field-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.req { color: var(--ember); }
+
+.input {
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 16px;
+  background: var(--canvas);
+  color: var(--ink);
+  border: 1px solid var(--input-line);
+  border-radius: 12px;
+  font-family: var(--sans);
+  font-size: 16px;
+  transition: border-color var(--fast) var(--ease);
+}
+
+/* Placeholder sits on dusk, not fog: #9da3af measured 2.42:1 on the
+   canvas fill, which is below AA for text. */
+.input::placeholder { color: var(--dusk); }
+.input:focus { outline: none; border-color: var(--ink); }
+
+.input.invalid { border-color: var(--ember); background: #fdf0ea; }
+
+textarea.input { min-height: 112px; resize: vertical; }
+
+select.input {
+  cursor: pointer;
+  appearance: none;
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235e646e' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+}
+
+select.input option { background: var(--white); color: var(--ink); }
+
+.hint { font-size: 13px; line-height: 1.45; color: var(--dusk); }
+
+.err {
+  display: none;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #a83a1c;
+}
+
+.invalid ~ .err { display: block; }
+.field.has-error .err { display: block; }
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--charcoal);
+  cursor: pointer;
+}
+
+.check input {
+  width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px;
+  accent-color: var(--ember); cursor: pointer;
+}
+
+.form-alert {
+  display: none;
+  padding: 14px 18px;
+  background: #fdeae2;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #8f3218;
+}
+
+.form-alert.show { display: block; }
+
+/* ---------- 16. Booking and confirmation ---------- */
+
+.page-head {
+  padding-top: 72px;
+  padding-bottom: 56px;
+}
+
+.split { display: grid; gap: 48px; align-items: start; }
+
+@media (min-width: 1000px) {
+  .split { grid-template-columns: 0.85fr 1fr; gap: 64px; }
+  .split-aside { position: sticky; top: 92px; }
+}
+
+.step-row {
+  display: grid;
+  gap: 2px 20px;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--silver);
+}
+
+.step-row:last-child { border-bottom: none; }
+.step-key { font-size: 15px; font-weight: 600; color: var(--ink); }
+.step-val { font-size: 15px; line-height: 1.45; color: var(--slate); }
+
+.steps { list-style: none; display: grid; gap: 14px; counter-reset: n; }
+
+.steps li {
+  counter-increment: n;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 12px;
+  align-items: start;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--slate);
+}
+
+.steps li::before {
+  content: counter(n);
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--ember);
+  line-height: 1.45;
+}
+
+/* ---------- 17. Receipt ---------- */
+
+.receipt dl { display: grid; gap: 12px 24px; }
+
+@media (min-width: 480px) { .receipt dl { grid-template-columns: 1fr auto; } }
+
+.receipt dt {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dusk);
+  padding-top: 5px;
+}
+
+.receipt dd {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: right;
+}
+
+/* ---------- 18. Closing ---------- */
+
+.closer .display { max-width: 18ch; margin-inline: auto; }
+.closer .body-lg { max-width: 52ch; margin: 24px auto 32px; }
+
+/* ---------- 19. Footer ---------- */
+
+.foot {
+  border-top: 1px solid var(--silver);
+  padding-block: 56px;
+}
+
+.foot-grid { display: grid; gap: 32px; }
+
+@media (min-width: 800px) { .foot-grid { grid-template-columns: 1.8fr 1fr 1fr; gap: 48px; } }
+
+.foot h4 {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dusk);
+  margin-bottom: 12px;
+}
+
+.foot ul { list-style: none; display: grid; gap: 8px; }
+.foot li, .foot a { font-size: 15px; color: var(--charcoal); }
+.foot a:hover { color: var(--ember); }
+
+.foot-base {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--silver);
+  font-size: 13px;
+  color: var(--fog);
+}
+
+/* ---------- 20. Motion ---------- */
+
+.rise { opacity: 0; transform: translateY(12px); }
+.rise.in { opacity: 1; transform: translateY(0); transition: opacity 500ms var(--ease), transform 500ms var(--ease); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .rise { opacity: 1; transform: none; }
+}

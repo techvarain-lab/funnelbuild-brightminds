@@ -1,0 +1,14 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Nothing else is ignored on purpose.
+# assets/images/ holds the original source photography, which cannot be
+# regenerated, and assets/images/optimized/ holds the files the pages
+# actually load. Both are tracked.

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reserve a Free Saturday Slot | Bright Minds Learning Center</title>
+<meta name="description" content="Reserve your child's free one hour tutoring diagnostic and trial class at Bright Minds Learning Center, Dasmarinas, Cavite. Saturdays 8am to 5pm, Grades 1 to 8.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..600&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="wordmark" href="index.html">
+      Bright Minds
+      <span class="wordmark-sub">Learning Center / Dasmarinas</span>
+    </a>
+    <div class="nav-right">
+      <a class="btn btn-outline btn-sm" href="index.html">Back</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-head">
+  <div class="wrap centre stack">
+    <p class="label">Saturdays only / no obligation / no card</p>
+    <h1 class="h-lg" style="max-width: 18ch; margin-inline: auto;">Reserve your child’s free Saturday slot</h1>
+    <p class="body-lg dim measure" style="margin-inline: auto;">
+      Tell us about your child and pick a Saturday time. We reply the same day with your confirmed
+      slot, the tutor’s name and directions.
+    </p>
+  </div>
+</section>
+
+<section class="band-tight" style="padding-bottom: 96px;">
+  <div class="wrap split">
+
+    <!-- ============ ASIDE ============ -->
+    <div class="split-aside stack-lg">
+
+      <div class="feature-card">
+        <p class="label" style="margin-bottom: 20px;">What you get</p>
+        <div class="step-row">
+          <span class="step-key">One hour</span>
+          <span class="step-val">One to one with a subject tutor at your child’s grade level.</span>
+        </div>
+        <div class="step-row">
+          <span class="step-key">A trial class</span>
+          <span class="step-val">A real session straight afterwards, on the same Saturday.</span>
+        </div>
+        <div class="step-row">
+          <span class="step-key">A written report</span>
+          <span class="step-val">Two pages on what is strong, what is not, and what to do next.</span>
+        </div>
+        <div class="step-row">
+          <span class="step-key">Nothing owed</span>
+          <span class="step-val">No enrolment, no package, no follow-up.</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <p class="label" style="margin-bottom: 20px;">After you submit</p>
+        <ol class="steps">
+          <li><span>We confirm your Saturday slot by text or email, the same day.</span></li>
+          <li><span>We read your note and match the right tutor to the subject and grade.</span></li>
+          <li><span>You arrive with the notebook and any quiz papers.</span></li>
+          <li><span>The written report reaches you within two or three days.</span></li>
+        </ol>
+      </div>
+
+      <div class="feature-card">
+        <p class="label" style="margin-bottom: 20px;">Good to know</p>
+        <div class="step-row">
+          <span class="step-key">Saturdays</span>
+          <span class="step-val">8am to 5pm only. Nine one hour slots, first come first served.</span>
+        </div>
+        <div class="step-row">
+          <span class="step-key">To bring</span>
+          <span class="step-val">The notebook your child uses, plus recent quiz papers.</span>
+        </div>
+        <div class="step-row">
+          <span class="step-key">Where</span>
+          <span class="step-val">Dasmarinas, Cavite. Address and parking in your confirmation.</span>
+        </div>
+        <div class="step-row">
+          <span class="step-key">Online</span>
+          <span class="step-val">Same Saturday hours, with a test call sent with your confirmation.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============ FORM ============ -->
+    <div class="stack-lg">
+
+      <!--
+        ==============================================================
+        GHL CALENDAR EMBED SLOT
+
+        Paste your GoHighLevel embedded calendar here. It renders the
+        parent's real available times.
+
+          <script src="https://widgets.gohighlevel.com/embed/calendarwidget.js"></script>
+          <div class="ghl-calendar" data-ghl-calendar-id="YOUR_ID"></div>
+
+        Keep the form below it either way. The form carries the grade
+        level and the struggle note, which the calendar cannot, and
+        the tutor needs both before the session.
+        ==============================================================
+      -->
+      <div class="small-card centre" style="padding: 40px 24px;">
+        <p class="label" style="margin-bottom: 8px;">Live availability</p>
+        <p class="body-sm dim">Your open times appear here once the calendar is connected.</p>
+        <code style="display:inline-block; margin-top:12px; padding:4px 8px; background: var(--canvas); border-radius:8px; font-size:12px; color: var(--dusk);">
+          data-ghl-calendar-id="YOUR_ID"
+        </code>
+      </div>
+
+      <div class="product-card product-card-pad stack-lg">
+        <div>
+          <h2 class="h" style="margin-bottom: 8px;">Or just send the request</h2>
+          <p class="hint">We will come back with two or three times that suit you.</p>
+        </div>
+
+        <form id="booking-form" novalidate class="stack-lg">
+
+          <div class="grid-2" style="gap: 20px;">
+            <div class="field">
+              <label for="parent-name">Your name <span class="req">*</span></label>
+              <input class="input" type="text" id="parent-name" name="parent_name"
+                     placeholder="Juan Dela Cruz" autocomplete="name" required>
+              <span class="err">We need a name to put the booking under.</span>
+            </div>
+
+            <div class="field">
+              <label for="contact">Mobile number <span class="req">*</span></label>
+              <input class="input" type="tel" id="contact" name="contact"
+                     placeholder="09XX XXX XXXX" autocomplete="tel" required>
+              <span class="err">Use a mobile number we can text, like 09XX XXX XXXX.</span>
+            </div>
+
+            <div class="field">
+              <label for="email">Email <span class="req">*</span></label>
+              <input class="input" type="email" id="email" name="email"
+                     placeholder="you@example.com" autocomplete="email" required>
+              <span class="err">That email address does not look right.</span>
+            </div>
+
+            <div class="field">
+              <label for="child-name">Your child's name <span class="req">*</span></label>
+              <input class="input" type="text" id="child-name" name="child_name"
+                     placeholder="Maria Dela Cruz" required>
+              <span class="err">We need your child's name to match them to a tutor.</span>
+            </div>
+
+            <div class="field">
+              <label for="grade">Grade level <span class="req">*</span></label>
+              <select class="input" id="grade" name="grade" required>
+                <option value="">Choose a grade</option>
+                <option>Grade 1</option>
+                <option>Grade 2</option>
+                <option>Grade 3</option>
+                <option>Grade 4</option>
+                <option>Grade 5</option>
+                <option>Grade 6</option>
+                <option>Grade 7</option>
+                <option>Grade 8</option>
+              </select>
+              <span class="err">We cover Grades 1 to 8. Pick the grade they are in now.</span>
+            </div>
+
+            <div class="field">
+              <label for="format">Where <span class="req">*</span></label>
+              <select class="input" id="format" name="format" required>
+                <option value="">Choose one</option>
+                <option>In person, Dasmarinas</option>
+                <option>Online</option>
+                <option>Not sure yet</option>
+              </select>
+              <span class="err">Let us know where you would like to meet.</span>
+            </div>
+          </div>
+
+          <!-- Subjects as selectable pills, which is Slite's native shape -->
+          <div class="field">
+            <span class="field-label" id="subject-label">Subject <span class="req">*</span></span>
+            <div class="chips chip-left" role="radiogroup" aria-labelledby="subject-label">
+              <label class="chip chip-pick">
+                <input type="radio" name="subject" value="Mathematics" required>
+                <span>Mathematics</span>
+              </label>
+              <label class="chip chip-pick">
+                <input type="radio" name="subject" value="English" required>
+                <span>English</span>
+              </label>
+              <label class="chip chip-pick">
+                <input type="radio" name="subject" value="Science" required>
+                <span>Science</span>
+              </label>
+            </div>
+            <span class="err">Choose one subject for the first session.</span>
+          </div>
+
+          <div class="field">
+            <label for="struggle">What is going wrong? <span class="req">*</span></label>
+            <textarea class="input" id="struggle" name="struggle" required
+              placeholder="She has cried over word problems twice this week. She was fine in maths last year and now she will not start without me sitting beside her."></textarea>
+            <span class="hint">
+              This goes straight to the tutor so the hour is aimed at the right problem before
+              your child arrives. Two sentences is plenty.
+            </span>
+            <span class="err">A sentence or two is plenty, just not empty.</span>
+          </div>
+
+          <div class="field">
+            <label for="preferred">Which Saturday time suits you? <span class="req">*</span></label>
+            <select class="input" id="preferred" name="preferred" required>
+              <option value="">Choose a time</option>
+              <option>8:00 AM</option>
+              <option>9:00 AM</option>
+              <option>10:00 AM</option>
+              <option>11:00 AM</option>
+              <option>12:00 PM</option>
+              <option>1:00 PM</option>
+              <option>2:00 PM</option>
+              <option>3:00 PM</option>
+              <option>4:00 PM</option>
+              <option>Any time that Saturday</option>
+            </select>
+            <span class="err">Pick whichever Saturday works and we will confirm the exact slot.</span>
+          </div>
+
+          <div class="field">
+            <label for="notes">Anything else <span class="dim">(optional)</span></label>
+            <textarea class="input" id="notes" name="notes" style="min-height: 88px;"
+              placeholder="A recent mark you are not happy with, a teacher's comment, a date coming up."></textarea>
+          </div>
+
+          <div class="field">
+            <label class="check">
+              <input type="checkbox" id="consent" name="consent" required>
+              <span>
+                You may contact me about this booking. We will only use your number for this and
+                for the session details. <span class="req">*</span>
+              </span>
+            </label>
+            <span class="err">We need this before we can save your request.</span>
+          </div>
+
+          <div class="form-alert" id="form-alert" role="alert"></div>
+
+          <div>
+            <button class="btn btn-ember btn-full btn-wrap" type="submit">Reserve My Child’s Free Saturday Slot</button>
+            <p class="hint" style="text-align:center; margin-top: 12px;">
+              Nothing is charged and nothing is booked until we confirm with you.
+            </p>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-base" style="margin-top: 0; padding-top: 0;">
+      &copy; <span id="year">2026</span> Bright Minds Learning Center / Dasmarinas, Cavite /
+      <a href="index.html">Back to the main page</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+(function () {
+  var form = document.getElementById('booking-form');
+  var alertBox = document.getElementById('form-alert');
+  var PHONE_RE = /^(09\d{9}|\+639\d{9})$/;
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  function clearErrors() {
+    form.querySelectorAll('.invalid').forEach(function (el) {
+      el.classList.remove('invalid');
+    });
+    form.querySelectorAll('.field').forEach(function (f) {
+      f.classList.remove('has-error');
+    });
+    alertBox.classList.remove('show');
+  }
+
+  function markField(input, groupName) {
+    if (groupName) {
+      form.querySelectorAll('[name="' + groupName + '"]').forEach(function (g) {
+        g.classList.add('invalid');
+      });
+      var group = form.querySelector('[name="' + groupName + '"]');
+      if (group && group.closest('.field')) group.closest('.field').classList.add('has-error');
+    } else {
+      input.classList.add('invalid');
+      if (input.closest('.field')) input.closest('.field').classList.add('has-error');
+    }
+  }
+
+  var rules = [
+    { el: form.parent_name, label: 'your name',
+      ok: function (v) { return v.trim().length >= 2; } },
+    { el: form.contact, label: 'a mobile number',
+      ok: function (v) { return PHONE_RE.test(v.replace(/[\s()-]/g, '')); } },
+    { el: form.email, label: 'an email address',
+      ok: function (v) { return EMAIL_RE.test(v.trim()); } },
+    { el: form.child_name, label: "your child's name",
+      ok: function (v) { return v.trim().length >= 2; } },
+    { el: form.grade, label: 'a grade level',
+      ok: function (v) { return v !== ''; } },
+    { el: form.struggle, label: 'a line about what is going wrong',
+      ok: function (v) { return v.trim().length >= 10; } },
+    { el: form.format, label: 'in person or online',
+      ok: function (v) { return v !== ''; } },
+    { el: form.preferred, label: 'a time that suits you',
+      ok: function (v) { return v !== ''; } }
+  ];
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    clearErrors();
+
+    var firstBad = null;
+    var missing = [];
+
+    rules.forEach(function (rule) {
+      if (!rule.ok(rule.el.value)) {
+        markField(rule.el);
+        missing.push(rule.label);
+        if (!firstBad) firstBad = rule.el;
+      }
+    });
+
+    var subject = form.querySelector('input[name="subject"]:checked');
+    if (!subject) {
+      markField(null, 'subject');
+      missing.push('a subject');
+      if (!firstBad) firstBad = form.querySelector('input[name="subject"]');
+    }
+
+    if (!form.consent.checked) {
+      markField(form.consent);
+      missing.push('your agreement to be contacted');
+      if (!firstBad) firstBad = form.consent;
+    }
+
+    if (firstBad) {
+      // Errors state the cause and the fix, never an apology.
+      alertBox.textContent = 'Still needed: ' + missing.join(', ') + '.';
+      alertBox.classList.add('show');
+      firstBad.focus();
+      return;
+    }
+
+    // ----------------------------------------------------------------
+    // TODO: send this somewhere real.
+    //   a) GoHighLevel Forms API webhook  -> POST payload to your GHL endpoint
+    //   b) Formspree or Netlify Forms    -> set action= and method on the form
+    //   c) Your own API                  -> fetch() below
+    // ----------------------------------------------------------------
+    var payload = {
+      parent_name: form.parent_name.value.trim(),
+      contact: form.contact.value.trim(),
+      email: form.email.value.trim(),
+      child_name: form.child_name.value.trim(),
+      grade: form.grade.value,
+      subject: subject.value,
+      struggle: form.struggle.value.trim(),
+      format: form.format.value,
+      preferred: form.preferred.value,
+      notes: form.notes.value.trim(),
+      submitted_at: new Date().toISOString()
+    };
+
+    try {
+      sessionStorage.setItem('bm_booking', JSON.stringify(payload));
+    } catch (err) {
+      // Private browsing can refuse storage. The page still works.
+    }
+
+    window.location.href = 'thank-you.html';
+  });
+
+  // Clear a warning as soon as the parent starts fixing it
+  form.addEventListener('input', function (e) {
+    var el = e.target;
+    if (!el.classList.contains('invalid')) return;
+
+    var clear = false;
+    if (el.type === 'checkbox' || el.name === 'subject') clear = el.checked;
+    else if (el.name === 'contact') clear = PHONE_RE.test(el.value.replace(/[\s()-]/g, ''));
+    else if (el.name === 'email') clear = EMAIL_RE.test(el.value.trim());
+    else if (el.name === 'struggle') clear = el.value.trim().length >= 10;
+    else clear = el.value.trim() !== '';
+
+    if (clear) {
+      el.classList.remove('invalid');
+      if (el.closest('.field')) el.closest('.field').classList.remove('has-error');
+      if (!form.querySelector('.invalid')) alertBox.classList.remove('show');
+    }
+  });
+
+  form.addEventListener('change', function (e) {
+    if (e.target.name === 'subject' && e.target.checked) {
+      form.querySelectorAll('input[name="subject"]').forEach(function (r) {
+        r.classList.remove('invalid');
+      });
+      var sf = form.querySelector('input[name="subject"]').closest('.field');
+      if (sf) sf.classList.remove('has-error');
+    }
+    if (e.target === form.consent && e.target.checked) {
+      e.target.classList.remove('invalid');
+      if (e.target.closest('.field')) e.target.closest('.field').classList.remove('has-error');
+    }
+    if (!form.querySelector('.invalid')) alertBox.classList.remove('show');
+  });
+})();
+</script>
+
+</body>
+</html>
