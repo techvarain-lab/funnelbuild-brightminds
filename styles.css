@@ -34,9 +34,6 @@
   --dusk: #636973;     /* shade dusk: small print, labels, unavailable cells */
   --fog: #9da3af;      /* shade fog: decorative fills, legend keys only */
 
-  /* Input borders need 3:1 to be perceivable as a control boundary.
-     #d9dde6 measured 1.3:1, effectively invisible. */
-  --input-line: #868d99;
 
   /* The single accent */
   --ember: #f67748;
@@ -112,11 +109,6 @@ a:hover { text-decoration: underline; text-decoration-color: var(--ember); }
 }
 .skip-link:focus { left: 0; }
 
-.sr-only {
-  position: absolute; width: 1px; height: 1px; overflow: hidden;
-  clip: rect(0 0 0 0); white-space: nowrap;
-}
-
 /* ---------- 3. Typography ---------- */
 
 /* 40px and above is always the serif. That is the rule. */
@@ -168,8 +160,10 @@ a:hover { text-decoration: underline; text-decoration-color: var(--ember); }
   color: var(--dusk);
 }
 
+/* Small helper copy under a block */
+.hint { font-size: 13px; line-height: 1.45; color: var(--dusk); }
+
 .measure { max-width: 62ch; }
-.measure-sm { max-width: 52ch; }
 .dim { color: var(--slate); }
 
 /* ---------- 4. The scribble annotation ----------
@@ -321,7 +315,6 @@ a:hover { text-decoration: underline; text-decoration-color: var(--ember); }
 .btn-outline:hover { background: var(--ink); color: var(--white); }
 
 .btn-sm { padding: 8px 18px; min-height: 38px; font-size: 15px; }
-.btn-full { width: 100%; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: center; }
 
 /* The full CTA label needs about 330px, which a 375px phone cannot give
@@ -350,27 +343,6 @@ a:hover { text-decoration: underline; text-decoration-color: var(--ember); }
 
 .chip-left { justify-content: flex-start; }
 
-/* Selectable chip, used for subject choice on the booking form */
-.chip-pick {
-  cursor: pointer;
-  border: 1.5px solid transparent;
-  transition: border-color var(--fast) var(--ease), background var(--fast) var(--ease);
-}
-
-.chip-pick:hover { border-color: var(--mist); }
-
-.chip-pick:has(input:checked) {
-  background: var(--ember);
-  color: var(--ink);
-}
-
-.chip-pick:has(.invalid) { border-color: var(--ember); background: #fdeae2; }
-
-.chip-pick input {
-  position: absolute;
-  opacity: 0;
-  width: 1px; height: 1px;
-}
 
 /* ---------- 9. Cards ---------- */
 
@@ -473,59 +445,18 @@ a:hover { text-decoration: underline; text-decoration-color: var(--ember); }
 .report-val { font-size: 15px; color: var(--slate); }
 .report-val.gap { color: var(--ink); font-weight: 600; }
 
-/* ---------- 13. Saturday slots ----------
-   Replaces the old six-day table. Bookings are Saturday only, so the
-   grid reads as a time picker and drops the horizontal scroll the
-   table forced on phones. Status stays in ink and dusk; ember is
-   reserved for the CTA. */
+/* ---------- 13. Live calendar embed ----------
+   The GoHighLevel widget loads iframeResizer, which sets the iframe
+   height by postMessage. Never give it a fixed height, that fights the
+   resizer. min-height is only a floor in case form_embed.js fails. */
 
-.slots {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+.gcal {
+  display: block;
+  min-height: 640px;
 }
 
-@media (min-width: 560px)  { .slots { grid-template-columns: repeat(3, 1fr); } }
-@media (min-width: 1000px) { .slots { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
-
-/* The tile is dust-filled rather than canvas-filled. Against the white
-   product card a canvas fill measured 1.05:1 and a silver border 1.17:1,
-   so nine slots read as one blank area. Dust on white gives the shape a
-   visible edge. This is a tonal step, not a 3:1 boundary: the Slite
-   palette is cream on cream throughout, and the time and status are
-   carried by text at 11.8:1 and 4.87:1, not by the border. */
-.slot {
-  background: var(--dust);
-  border: 1px solid var(--mist);
-  border-radius: 12px;
-  padding: 14px 16px;
-}
-
-.slot-time {
-  font-family: var(--serif);
-  font-size: 19px;
-  font-weight: 500;
-  color: var(--ink);
-  line-height: 1.2;
-}
-
-.slot-state {
-  font-size: 13px;
-  line-height: 1.2;
-  margin-top: 4px;
-}
-
-.slot-state.open { color: var(--ink); font-weight: 600; }
-.slot-state.wait { color: var(--charcoal); font-weight: 500; }
-.slot-state.full { color: var(--dusk); }
-
-/* Legend keys */
-.key-dot {
-  display: inline-block;
-  width: 10px; height: 10px;
-  border-radius: 2px;
-  margin-right: 8px;
-  vertical-align: middle;
+@media (max-width: 640px) {
+  .gcal { min-height: 760px; }
 }
 
 /* ---------- 14. Questions ---------- */
@@ -564,92 +495,7 @@ a:hover { text-decoration: underline; text-decoration-color: var(--ember); }
 
 .q-a { padding-bottom: 24px; max-width: 68ch; font-size: 16px; line-height: 1.5; color: var(--slate); }
 
-/* ---------- 15. Forms ---------- */
-
-.field { display: flex; flex-direction: column; gap: 8px; }
-
-.field > label,
-.field-label {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--charcoal);
-}
-
-.req { color: var(--ember); }
-
-.input {
-  width: 100%;
-  min-height: 44px;
-  padding: 12px 16px;
-  background: var(--canvas);
-  color: var(--ink);
-  border: 1px solid var(--input-line);
-  border-radius: 12px;
-  font-family: var(--sans);
-  font-size: 16px;
-  transition: border-color var(--fast) var(--ease);
-}
-
-/* Placeholder sits on dusk, not fog: #9da3af measured 2.42:1 on the
-   canvas fill, which is below AA for text. */
-.input::placeholder { color: var(--dusk); }
-.input:focus { outline: none; border-color: var(--ink); }
-
-.input.invalid { border-color: var(--ember); background: #fdf0ea; }
-
-textarea.input { min-height: 112px; resize: vertical; }
-
-select.input {
-  cursor: pointer;
-  appearance: none;
-  padding-right: 40px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235e646e' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  background-size: 16px;
-}
-
-select.input option { background: var(--white); color: var(--ink); }
-
-.hint { font-size: 13px; line-height: 1.45; color: var(--dusk); }
-
-.err {
-  display: none;
-  font-size: 13px;
-  line-height: 1.45;
-  color: #a83a1c;
-}
-
-.invalid ~ .err { display: block; }
-.field.has-error .err { display: block; }
-
-.check {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  font-size: 15px;
-  line-height: 1.45;
-  color: var(--charcoal);
-  cursor: pointer;
-}
-
-.check input {
-  width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px;
-  accent-color: var(--ember); cursor: pointer;
-}
-
-.form-alert {
-  display: none;
-  padding: 14px 18px;
-  background: #fdeae2;
-  border-radius: 12px;
-  font-size: 15px;
-  color: #8f3218;
-}
-
-.form-alert.show { display: block; }
-
-/* ---------- 16. Booking and confirmation ---------- */
+/* ---------- 15. Booking and confirmation ---------- */
 
 .page-head {
   padding-top: 72px;
@@ -696,28 +542,6 @@ select.input option { background: var(--white); color: var(--ink); }
   line-height: 1.45;
 }
 
-/* ---------- 17. Receipt ---------- */
-
-.receipt dl { display: grid; gap: 12px 24px; }
-
-@media (min-width: 480px) { .receipt dl { grid-template-columns: 1fr auto; } }
-
-.receipt dt {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--dusk);
-  padding-top: 5px;
-}
-
-.receipt dd {
-  font-family: var(--serif);
-  font-size: 17px;
-  font-weight: 500;
-  color: var(--ink);
-  text-align: right;
-}
 
 /* ---------- 18. Closing ---------- */
 
